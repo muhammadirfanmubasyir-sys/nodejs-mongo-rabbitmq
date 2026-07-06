@@ -1,9 +1,12 @@
 {
   "name": "notification-service",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Notification consumer microservice with RabbitMQ",
+  "main": "src/server.js",
   "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "lint": "eslint src/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,8 +14,13 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "amqplib": "^1.0.6",
+    "amqplib": "^1.0.7",
+    "dotenv": "^16.4.7",
     "express": "^5.2.1",
-    "mongoose": "^9.6.1"
+    "helmet": "^8.0.0",
+    "pino": "^9.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0"
   }
 }

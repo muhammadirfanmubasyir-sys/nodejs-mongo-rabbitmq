@@ -1,9 +1,12 @@
 {
   "name": "user-service",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "User microservice with Express and MongoDB",
+  "main": "src/server.js",
   "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "lint": "eslint src/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,9 +14,16 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "body-parser": "^2.2.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^5.2.1",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
     "mongoose": "^9.6.1",
-    "morgan": "^1.10.1"
+    "pino": "^9.6.0",
+    "pino-http": "^10.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0"
   }
 }

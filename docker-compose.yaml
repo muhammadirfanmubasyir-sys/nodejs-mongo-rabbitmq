@@ -1,48 +1,95 @@
 services:
   mongo:
-    image: mongo:latest
-    pull_policy: missing
+    image: mongo:7
     container_name: mongo
+    pull_policy: never
     ports:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
   rabbitmq:
     image: rabbitmq:3-management
-    pull_policy: missing
-    container_name: rabbitmq 
+    container_name: rabbitmq
+    pull_policy: never
     ports:
       - "5672:5672"
-      - "15672:15672" 
+      - "15672:15672"
     volumes:
-      - rabbitmq-data:/var/lib/rabbitmq 
+      - rabbitmq-data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
   user-service:
     build: ./user-service
-    pull_policy: always
     container_name: user-service
     ports:
       - "3001:3001"
+    environment:
+      - PORT=3001
+      - MONGO_URI=mongodb://mongo:27017/user-service
+      - NODE_ENV=production
     depends_on:
-      - mongo
-      - rabbitmq
+      mongo:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3001/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
   task-service:
-    build: ./task-service 
-    pull_policy: always
+    build: ./task-service
     container_name: task-service
     ports:
       - "3002:3002"
+    environment:
+      - PORT=3002
+      - MONGO_URI=mongodb://mongo:27017/task-service
+      - RABBITMQ_URL=amqp://rabbitmq:5672
+      - QUEUE_NAME=task_queue
+      - NODE_ENV=production
     depends_on:
-      - mongo
-      - rabbitmq
+      mongo:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3002/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
   notification-service:
-    build: ./notification-service 
-    pull_policy: always
+    build: ./notification-service
     container_name: notification-service
     ports:
       - "3003:3003"
+    environment:
+      - PORT=3003
+      - RABBITMQ_URL=amqp://rabbitmq:5672
+      - QUEUE_NAME=task_queue
+      - NODE_ENV=production
     depends_on:
-      - rabbitmq
+      rabbitmq:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3003/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
 volumes:
   mongo-data:
   rabbitmq-data:
-

@@ -1,7 +1,14 @@
-FROM node:24-slim
+FROM node:24-slim AS base
 WORKDIR /app
+
+FROM base AS deps
 COPY package*.json ./
-RUN npm install
-COPY . .    
+RUN npm ci --only=production
+
+FROM base AS runtime
+RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+USER appuser
 EXPOSE 3002
-CMD ["node", "index.js"]
+CMD ["node", "src/server.js"]
