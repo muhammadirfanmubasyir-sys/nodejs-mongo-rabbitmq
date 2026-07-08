@@ -123,6 +123,18 @@ npm run test:integration --workspace=user-service</code></pre>
 <h2>4. Benchmark (HTTP Throughput &amp; Latency)</h2>
 <p>Measures raw HTTP performance using <code>autocannon</code> against mock servers (no real DB). Results reflect the Node.js HTTP layer capacity.</p>
 
+<h3>Tool: autocannon</h3>
+<table>
+<thead><tr><th>Property</th><th>Detail</th></tr></thead>
+<tbody>
+<tr><td><b>Name</b></td><td><a href="https://github.com/mcollina/autocannon" target="_blank">autocannon</a></td></tr>
+<tr><td><b>Author</b></td><td>Matteo Collina</td></tr>
+<tr><td><b>Purpose</b></td><td>Fast HTTP/HTTPS benchmarking for Node.js</td></tr>
+<tr><td><b>Key Features</b></td><td>High-performance via <code>http.request</code>, supports pipelining, connections, duration config, latency percentiles (p50, p99), throughput metrics, JSON output</td></tr>
+<tr><td><b>Install</b></td><td><code>npm install -g autocannon</code></td></tr>
+</tbody>
+</table>
+
 <h3>Run</h3>
 <pre><code>npm run benchmark</code></pre>
 
