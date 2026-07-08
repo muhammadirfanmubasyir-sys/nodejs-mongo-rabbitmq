@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Coverage Report</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0d1117; color: #c9d1d9; padding: 2rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #f0f6fc; }
+    .subtitle { color: #8b949e; margin-bottom: 2rem; font-size: 0.95rem; }
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .summary-card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1.25rem; }
+    .summary-card .label { font-size: 0.85rem; color: #8b949e; margin-bottom: 0.5rem; }
+    .summary-card .value { font-size: 2rem; font-weight: 700; }
+    .summary-card .detail { font-size: 0.8rem; color: #8b949e; margin-top: 0.25rem; }
+    .pass { color: #3fb950; }
+    .warn { color: #d29922; }
+    .fail { color: #f85149; }
+    table { width: 100%; border-collapse: collapse; background: #161b22; border: 1px solid #30363d; border-radius: 8px; overflow: hidden; }
+    th, td { padding: 0.85rem 1.25rem; text-align: left; border-bottom: 1px solid #21262d; }
+    th { background: #1c2128; color: #f0f6fc; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover { background: #1c2128; }
+    .service-name { font-weight: 600; color: #f0f6fc; }
+    .bar-container { width: 120px; height: 8px; background: #21262d; border-radius: 4px; overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 8px; }
+    .bar { height: 100%; border-radius: 4px; transition: width 0.3s; }
+    .bar-green { background: #3fb950; }
+    .bar-yellow { background: #d29922; }
+    .bar-red { background: #f85149; }
+    .pct { font-weight: 600; font-variant-numeric: tabular-nums; }
+    .tests-badge { display: inline-block; background: #238636; color: #fff; padding: 0.15rem 0.5rem; border-radius: 10px; font-size: 0.8rem; font-weight: 600; }
+    .overall-section { margin-top: 2rem; }
+    .overall-section h2 { font-size: 1.25rem; margin-bottom: 1rem; color: #f0f6fc; }
+    .progress-row { display: flex; align-items: center; margin-bottom: 0.75rem; }
+    .progress-label { width: 120px; font-size: 0.9rem; color: #8b949e; }
+    .progress-bar-container { flex: 1; height: 24px; background: #21262d; border-radius: 12px; overflow: hidden; position: relative; }
+    .progress-bar { height: 100%; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; color: #fff; transition: width 0.5s; }
+    .progress-value { margin-left: 1rem; font-weight: 600; width: 60px; text-align: right; font-variant-numeric: tabular-nums; }
+    .footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #30363d; color: #8b949e; font-size: 0.8rem; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Code Coverage Report</h1>
+    <p class="subtitle">Microservices &mdash; notification-service, task-service, user-service</p>
+
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="label">Total Tests</div>
+        <div class="value pass">115</div>
+        <div class="detail">115 passed, 0 failed</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Statements</div>
+        <div class="value pass">99.2%</div>
+        <div class="detail">331 / 334 covered</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Branches</div>
+        <div class="value pass">96.3%</div>
+        <div class="detail">98 / 102 covered</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Functions</div>
+        <div class="value pass">94.3%</div>
+        <div class="detail">49 / 52 covered</div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Tests</th>
+          <th>Statements</th>
+          <th>Branches</th>
+          <th>Functions</th>
+          <th>Lines</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="service-name">notification-service</td>
+          <td><span class="tests-badge">24 / 24</span></td>
+          <td>
+            <div class="bar-container"><div class="bar bar-green" style="width: 100%"></div></div>
+            <span class="pct pass">100%</span>
+          </td>
+          <td>
+            <div class="bar-container"><div class="bar bar-green" style="width: 90.91%"></div></div>
+            <span class="pct pass">90.91%</span>
+          </td>
+          <td>
+            <div class="bar-container"><div class="bar bar-green" style="width: 100%"></div></div>
+            <span class="pct pass">100%</span>
+          </td>
+          <td>
+            <div class="bar-container"><div class="bar bar-green" style="width: 100%"></div></div>
+            <span class="pct pass">100%</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-name">task-service</td>
+          <td><span class="tests-badge">44 / 44</span></td>
+          <td>
+            <div class="bar-container"><div class="bar bar-green" style="width: 98.61%"></div></div>
+            <span class="pct pass">98.61%</span>
+          </td>
+          <td>
+            <div class="bar-container"><div class="bar bar-green" style="width: 95.24%"></div></div>
+            <span class="pct pass">95.24%</span>
+          </td>
+          <td>
+            <div class="bar-container"><div class="bar bar-green" style="width: 91.3%"></div></div>
+            <span class="pct pass">91.30%</span>
+          </td>
+          <td>
+            <div class="bar-container"><div class="bar bar-green" style="width: 98.56%"></div></div>
+            <span class="pct pass">98.56%</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-name">user-service</td>
+          <td><span class="tests-badge">47 / 47</span></td>
+          <td>
+            <div class="bar-container"><div class="bar bar-green" style="width: 99.22%"></div></div>
+            <span class="pct pass">99.22%</span>
+          </td>
+          <td>
+            <div class="bar-container"><div class="bar bar-green" style="width: 100%"></div></div>
+            <span class="pct pass">100%</span>
+          </td>
+          <td>
+            <div class="bar-container"><div class="bar bar-green" style="width: 94.44%"></div></div>
+            <span class="pct pass">94.44%</span>
+          </td>
+          <td>
+            <div class="bar-container"><div class="bar bar-green" style="width: 99.21%"></div></div>
+            <span class="pct pass">99.21%</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="overall-section">
+      <h2>Overall Coverage</h2>
+
+      <div class="progress-row">
+        <div class="progress-label">Statements</div>
+        <div class="progress-bar-container">
+          <div class="progress-bar bar-green" style="width: 99.2%">99.2%</div>
+        </div>
+        <div class="progress-value pass">99.2%</div>
+      </div>
+
+      <div class="progress-row">
+        <div class="progress-label">Branches</div>
+        <div class="progress-bar-container">
+          <div class="progress-bar bar-green" style="width: 96.3%">96.3%</div>
+        </div>
+        <div class="progress-value pass">96.3%</div>
+      </div>
+
+      <div class="progress-row">
+        <div class="progress-label">Functions</div>
+        <div class="progress-bar-container">
+          <div class="progress-bar bar-green" style="width: 94.3%">94.3%</div>
+        </div>
+        <div class="progress-value pass">94.3%</div>
+      </div>
+
+      <div class="progress-row">
+        <div class="progress-label">Lines</div>
+        <div class="progress-bar-container">
+          <div class="progress-bar bar-green" style="width: 99.1%">99.1%</div>
+        </div>
+        <div class="progress-value pass">99.1%</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Generated on <span id="date"></span> &mdash; Coverage threshold: 90% (all metrics pass)
+    </div>
+  </div>
+  <script>document.getElementById('date').textContent = new Date().toLocaleString();</script>
+</body>
+</html>
