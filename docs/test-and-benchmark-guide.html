@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Test &amp; Benchmark Guide — Node.js Microservices</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.7;padding:2rem}
+.c{max-width:900px;margin:0 auto}
+h1{font-size:2.2rem;color:#f0f6fc;margin-bottom:.25rem}
+.sub{color:#8b949e;margin-bottom:2rem;font-size:.95rem}
+h2{font-size:1.4rem;color:#f0f6fc;margin:2rem 0 1rem;padding-bottom:.5rem;border-bottom:1px solid #30363d}
+h3{font-size:1.1rem;color:#58a6ff;margin:1.5rem 0 .75rem}
+p{margin-bottom:1rem}
+code{background:#161b22;border:1px solid #30363d;border-radius:6px;padding:.15rem .4rem;font-family:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace;font-size:.85rem;color:#f0f6fc}
+pre{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:1rem 1.25rem;overflow-x:auto;margin:1rem 0 1.5rem;font-size:.85rem;color:#e6edf3}
+pre code{background:none;border:none;padding:0}
+.note{background:#161b22;border-left:4px solid #58a6ff;border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:1rem 0 1.5rem;font-size:.9rem;color:#8b949e}
+.note b{color:#c9d1d9}
+.warn{border-left-color:#d29922}
+.ok{border-left-color:#3fb950}
+table{width:100%;border-collapse:collapse;background:#161b22;border:1px solid #30363d;border-radius:8px;overflow:hidden;margin:1rem 0 1.5rem}
+th,td{padding:.6rem 1rem;text-align:left;border-bottom:1px solid #21262d;font-size:.85rem}
+th{background:#1c2128;color:#f0f6fc;font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:.04em}
+tr:last-child td{border-bottom:none}
+.badge{display:inline-block;padding:.15rem .5rem;border-radius:4px;font-size:.75rem;font-weight:600}
+.b-green{background:#238636;color:#fff}
+.b-blue{background:#1f6feb;color:#fff}
+.b-yellow{background:#9e6a03;color:#fff}
+.b-red{background:#da3633;color:#fff}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1rem 0}
+@media(max-width:700px){.cols{grid-template-columns:1fr}}
+.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:1.25rem}
+.card h4{font-size:.95rem;color:#f0f6fc;margin-bottom:.5rem}
+.card ul{padding-left:1.2rem;font-size:.85rem;color:#8b949e}
+.card li{margin:.25rem 0}
+a{color:#58a6ff;text-decoration:none}
+a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #30363d;margin:2rem 0}
+.ft{margin-top:2rem;padding-top:1rem;border-top:1px solid #30363d;color:#8b949e;font-size:.8rem;text-align:center}
+</style>
+</head>
+<body>
+<div class="c">
+
+<h1>Test &amp; Benchmark Guide</h1>
+<p class="sub">Node.js Microservices — notification-service, task-service, user-service</p>
+
+<hr>
+
+<h2>1. Unit Tests</h2>
+<p>Unit tests validate individual controllers, services, utils, and middleware in isolation using mocks.</p>
+
+<h3>Run All Services</h3>
+<pre><code>npm run test</code></pre>
+
+<h3>Run Individually</h3>
+<pre><code>npm run test:task          # task-service
+npm run test:user          # user-service
+npm run test:notification  # notification-service</code></pre>
+
+<h3>What Gets Tested</h3>
+<table>
+<thead><tr><th>Service</th><th>Suites</th><th>Tests</th><th>Coverage</th></tr></thead>
+<tbody>
+<tr><td>notification-service</td><td>4</td><td>24</td><td><span class="badge b-green">100%</span></td></tr>
+<tr><td>task-service</td><td>11</td><td>44</td><td><span class="badge b-green">98.6%</span></td></tr>
+<tr><td>user-service</td><td>11</td><td>47</td><td><span class="badge b-green">99.2%</span></td></tr>
+</tbody>
+</table>
+
+<div class="note note">
+<b>Tip:</b> Use <code>jest --verbose</code> to see individual test names. Add <code>--watch</code> for watch mode during development.
+</div>
+
+<hr>
+
+<h2>2. Coverage Reports (HTML)</h2>
+<p>Generates HTML coverage reports at 90% threshold across branches, functions, lines, and statements.</p>
+
+<h3>Run Coverage — All Services</h3>
+<pre><code>npm run test:coverage --workspaces</code></pre>
+
+<h3>Run Coverage — Per Service</h3>
+<pre><code>npm run test:coverage --workspace=task-service
+npm run test:coverage --workspace=user-service
+npm run test:coverage --workspace=notification-service</code></pre>
+
+<h3>Report Locations</h3>
+<table>
+<thead><tr><th>Service</th><th>HTML Report</th></tr></thead>
+<tbody>
+<tr><td>notification-service</td><td><code>notification-service/coverage/index.html</code></td></tr>
+<tr><td>task-service</td><td><code>task-service/coverage/index.html</code></td></tr>
+<tr><td>user-service</td><td><code>user-service/coverage/index.html</code></td></tr>
+<tr><td>Combined (all services)</td><td><code>coverage/index.html</code></td></tr>
+</tbody>
+</table>
+
+<div class="note note">
+<b>Coverage thresholds</b> are enforced in each service's <code>jest.config.js</code>: branches ≥ 90%, functions ≥ 90%, lines ≥ 90%, statements ≥ 90%.
+</div>
+
+<hr>
+
+<h2>3. Integration Tests</h2>
+<p>Integration tests run against real MongoDB and RabbitMQ instances.</p>
+
+<h3>Prerequisites</h3>
+<pre><code>docker compose up -d</code></pre>
+
+<h3>Run</h3>
+<pre><code>npm run test:integration --workspace=task-service
+npm run test:integration --workspace=user-service</code></pre>
+
+<div class="note warn">
+<b>⚠ Note:</b> Integration tests are currently disabled (<code>describe.skip</code>) because MongoMemoryServer requires downloading a ~600MB MongoDB binary which times out. To enable: remove the <code>skip</code> and ensure a cached MongoDB binary or a local MongoDB instance is available.
+</div>
+
+<hr>
+
+<h2>4. Benchmark (HTTP Throughput &amp; Latency)</h2>
+<p>Measures raw HTTP performance using <code>autocannon</code> against mock servers (no real DB). Results reflect the Node.js HTTP layer capacity.</p>
+
+<h3>Run</h3>
+<pre><code>npm run benchmark</code></pre>
+
+<h3>Configuration</h3>
+<p>Edit <code>benchmark/config.js</code> to adjust:</p>
+<table>
+<thead><tr><th>Parameter</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>connections</code></td><td>100</td><td>Concurrent TCP connections</td></tr>
+<tr><td><code>pipelining</code></td><td>10</td><td>Requests pipelined per connection</td></tr>
+<tr><td><code>duration</code></td><td>5s</td><td>Benchmark duration per endpoint</td></tr>
+<tr><td><code>timeout</code></td><td>30000ms</td><td>Global timeout</td></tr>
+</tbody>
+</table>
+
+<h3>Results</h3>
+<table>
+<thead><tr><th>File</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>benchmark/benchmark-report.html</code></td><td>Visual HTML report with tables and charts</td></tr>
+<tr><td><code>benchmark/benchmark-results.json</code></td><td>Machine-readable JSON for CI/CD integration</td></tr>
+</tbody>
+</table>
+
+<h3>Endpoints Tested</h3>
+<div class="cols">
+<div class="card">
+<h4>user-service</h4>
+<ul>
+<li><code>GET  /health</code></li>
+<li><code>POST /api/users</code></li>
+<li><code>GET  /api/users</code></li>
+<li><code>GET  /api/users/id/:id</code></li>
+<li><code>PUT  /api/users/:id</code></li>
+<li><code>DEL  /api/users/id/:id</code></li>
+</ul>
+</div>
+<div class="card">
+<h4>task-service</h4>
+<ul>
+<li><code>GET  /health</code></li>
+<li><code>POST /api/tasks</code></li>
+<li><code>GET  /api/tasks</code></li>
+<li><code>GET  /api/tasks/:id</code></li>
+</ul>
+</div>
+</div>
+<div class="card" style="margin-top:1.5rem">
+<h4>notification-service</h4>
+<ul>
+<li><code>GET /health</code></li>
+</ul>
+</div>
+
+<hr>
+
+<h2>5. All Commands Quick Reference</h2>
+<table>
+<thead><tr><th>Command</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>npm run test</code></td><td>Run all unit tests (all services)</td></tr>
+<tr><td><code>npm run test:task</code></td><td>Run task-service unit tests</td></tr>
+<tr><td><code>npm run test:user</code></td><td>Run user-service unit tests</td></tr>
+<tr><td><code>npm run test:notification</code></td><td>Run notification-service unit tests</td></tr>
+<tr><td><code>npm run test:coverage --workspaces</code></td><td>Generate coverage HTML reports (all services)</td></tr>
+<tr><td><code>npm run test:integration --workspace=task-service</code></td><td>Run task-service integration tests</td></tr>
+<tr><td><code>npm run test:integration --workspace=user-service</code></td><td>Run user-service integration tests</td></tr>
+<tr><td><code>npm run benchmark</code></td><td>Run HTTP benchmark</td></tr>
+</tbody>
+</table>
+
+<h2>6. Tech Stack</h2>
+<div class="cols">
+<div class="card">
+<h4>Testing</h4>
+<ul>
+<li>Jest — test framework</li>
+<li>autocannon — HTTP benchmarking</li>
+</ul>
+</div>
+<div class="card">
+<h4>Services</h4>
+<ul>
+<li>Node.js + Express</li>
+<li>MongoDB (Mongoose)</li>
+<li>RabbitMQ</li>
+</ul>
+</div>
+</div>
+
+<div class="ft">Generated 2026-07-08 — Node.js Microservices</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,123 @@
+[
+  {
+    "service": "user-service",
+    "endpoint": "GET  /health",
+    "req/s": 3729,
+    "latency avg (ms)": 280.61,
+    "latency p50 (ms)": 254,
+    "latency p99 (ms)": 786,
+    "throughput (MB/s)": 0.69,
+    "total requests": 18640,
+    "errors": 0
+  },
+  {
+    "service": "user-service",
+    "endpoint": "POST /api/users",
+    "req/s": 2780.8,
+    "latency avg (ms)": 389.38,
+    "latency p50 (ms)": 366,
+    "latency p99 (ms)": 887,
+    "throughput (MB/s)": 0.68,
+    "total requests": 13900,
+    "errors": 0
+  },
+  {
+    "service": "user-service",
+    "endpoint": "GET  /api/users",
+    "req/s": 3379,
+    "latency avg (ms)": 310.47,
+    "latency p50 (ms)": 301,
+    "latency p99 (ms)": 890,
+    "throughput (MB/s)": 0.69,
+    "total requests": 16890,
+    "errors": 0
+  },
+  {
+    "service": "user-service",
+    "endpoint": "GET  /api/users/id/:id",
+    "req/s": 5581.2,
+    "latency avg (ms)": 184.36,
+    "latency p50 (ms)": 176,
+    "latency p99 (ms)": 340,
+    "throughput (MB/s)": 1.34,
+    "total requests": 27900,
+    "errors": 0
+  },
+  {
+    "service": "user-service",
+    "endpoint": "PUT  /api/users/:id",
+    "req/s": 2502.81,
+    "latency avg (ms)": 420.89,
+    "latency p50 (ms)": 429,
+    "latency p99 (ms)": 629,
+    "throughput (MB/s)": 0.55,
+    "total requests": 12510,
+    "errors": 0
+  },
+  {
+    "service": "user-service",
+    "endpoint": "DEL  /api/users/id/:id",
+    "req/s": 3981.2,
+    "latency avg (ms)": 267.54,
+    "latency p50 (ms)": 263,
+    "latency p99 (ms)": 678,
+    "throughput (MB/s)": 0.88,
+    "total requests": 19900,
+    "errors": 0
+  },
+  {
+    "service": "task-service",
+    "endpoint": "GET  /health",
+    "req/s": 4148.4,
+    "latency avg (ms)": 253.5,
+    "latency p50 (ms)": 240,
+    "latency p99 (ms)": 477,
+    "throughput (MB/s)": 0.77,
+    "total requests": 20740,
+    "errors": 0
+  },
+  {
+    "service": "task-service",
+    "endpoint": "POST /api/tasks",
+    "req/s": 3302.6,
+    "latency avg (ms)": 323.81,
+    "latency p50 (ms)": 268,
+    "latency p99 (ms)": 863,
+    "throughput (MB/s)": 0.85,
+    "total requests": 16510,
+    "errors": 0
+  },
+  {
+    "service": "task-service",
+    "endpoint": "GET  /api/tasks",
+    "req/s": 4305.61,
+    "latency avg (ms)": 243.33,
+    "latency p50 (ms)": 225,
+    "latency p99 (ms)": 410,
+    "throughput (MB/s)": 0.88,
+    "total requests": 21520,
+    "errors": 0
+  },
+  {
+    "service": "task-service",
+    "endpoint": "GET  /api/tasks/:id",
+    "req/s": 2902.8,
+    "latency avg (ms)": 349.25,
+    "latency p50 (ms)": 343,
+    "latency p99 (ms)": 670,
+    "throughput (MB/s)": 0.67,
+    "total requests": 14510,
+    "errors": 0
+  },
+  {
+    "service": "notification-service",
+    "endpoint": "GET /health",
+    "req/s": 5241.8,
+    "latency avg (ms)": 199.46,
+    "latency p50 (ms)": 177,
+    "latency p99 (ms)": 325,
+    "throughput (MB/s)": 0.97,
+    "total requests": 26200,
+    "errors": 0
+  }
+]

@@ -12,6 +12,8 @@
     "test": "npm run test --workspaces",
     "test:user": "npm run test --workspace=user-service",
     "test:task": "npm run test --workspace=task-service",
-    "test:notification": "npm run test --workspace=notification-service"
+    "test:notification": "npm run test --workspace=notification-service",
+    "benchmark": "node benchmark/run.js",
+    "test:coverage": "npm run test:coverage --workspaces --if-present"
   }
 }
