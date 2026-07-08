@@ -7,7 +7,10 @@
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
     "lint": "eslint src/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --forceExit --detectOpenHandles",
+    "test:unit": "jest --testPathPattern=__tests__/(services|config|utils) --forceExit",
+    "test:integration": "jest --testPathPattern=__tests__/integration --forceExit --detectOpenHandles",
+    "test:coverage": "jest --forceExit --detectOpenHandles --coverage"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +24,7 @@
     "pino": "^9.6.0"
   },
   "devDependencies": {
-    "eslint": "^9.0.0"
+    "eslint": "^9.0.0",
+    "jest": "^29.7.0"
   }
 }

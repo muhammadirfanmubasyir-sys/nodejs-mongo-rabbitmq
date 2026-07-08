@@ -1,0 +1,17 @@
+{
+  "name": "nodejs-mongo-rabbitmq",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Microservices demo with Node.js, MongoDB, and RabbitMQ",
+  "workspaces": [
+    "user-service",
+    "task-service",
+    "notification-service"
+  ],
+  "scripts": {
+    "test": "npm run test --workspaces",
+    "test:user": "npm run test --workspace=user-service",
+    "test:task": "npm run test --workspace=task-service",
+    "test:notification": "npm run test --workspace=notification-service"
+  }
+}
